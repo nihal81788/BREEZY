@@ -1,0 +1,130 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+:root {
+  /* Fonts */
+  --font-display: 'Clash Display', 'Cabinet Grotesk', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
+
+  /* Color System — Warm Light Theme (Default) */
+  --bg: #FFF8F0;
+  --bg-alt: #FDF6EE;
+  --text: #2B2420;
+  --text-muted: #9A8A7A;
+  --card-bg: #FFFAF3;
+  --card-border: rgba(243, 221, 191, 0.6);
+  
+  /* 3D Tactile Tokens */
+  --radius-3d: 24px;
+  /* Warm claymorphic shadow: warm tint drop shadow + soft light highlight */
+  --shadow-3d: 10px 14px 34px -4px rgba(194, 120, 40, 0.08), -8px -8px 20px 0px rgba(255, 255, 255, 0.5), inset 0 0 0 1px rgba(243, 221, 191, 0.6);
+  --shadow-3d-hover: 4px 6px 14px -2px rgba(194, 120, 40, 0.08), -4px -4px 10px 0px rgba(255, 255, 255, 0.5), inset 0 0 0 1px rgba(243, 221, 191, 0.8);
+  --shadow-3d-inset: inset 6px 8px 16px -2px rgba(194, 120, 40, 0.08), inset -4px -4px 10px 0px rgba(255, 255, 255, 0.4);
+
+  /* Accents — Default */
+  --accent: #F0731E;
+  --accent-soft: rgba(240, 115, 30, 0.08);
+  --ambient-glow: rgba(240, 115, 30, 0.15);
+}
+
+/* Dark Mode Class Overrides */
+.dark {
+  --bg: #1A1512;
+  --bg-alt: #241D19;
+  --text: #FDEBD9;
+  --text-muted: #A8978A;
+  --card-bg: #1F1915;
+  --card-border: rgba(243, 221, 191, 0.05);
+
+  /* 3D Tactile Tokens — Dark Warm */
+  --shadow-3d: 10px 14px 34px -4px rgba(0, 0, 0, 0.4), -8px -8px 20px 0px rgba(255, 255, 255, 0.02), inset 0 0 0 1px rgba(243, 221, 191, 0.05);
+  --shadow-3d-hover: 4px 6px 14px -2px rgba(0, 0, 0, 0.4), -4px -4px 10px 0px rgba(255, 255, 255, 0.02), inset 0 0 0 1px rgba(243, 221, 191, 0.08);
+  --shadow-3d-inset: inset 6px 8px 16px -2px rgba(0, 0, 0, 0.4);
+
+  /* Accents — Dark Default */
+  --accent: #C2540E;
+  --accent-soft: rgba(194, 84, 14, 0.12);
+  --ambient-glow: rgba(194, 84, 14, 0.05);
+}
+
+/* 3D Tactile Card Base and Press Down animation */
+.card-3d {
+  background: var(--card-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-3d);
+  border-radius: var(--radius-3d);
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              box-shadow 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              background-color 0.3s ease, border-color 0.3s ease;
+  transform: translateY(0);
+}
+
+/* Tactile Clickable Hover State (presses down) */
+.card-3d-interactive:hover {
+  transform: translateY(6px);
+  box-shadow: var(--shadow-3d-hover);
+}
+
+.card-3d-interactive:active {
+  transform: translateY(8px);
+  box-shadow: var(--shadow-3d-inset);
+}
+
+/* 3D Perspective Card Tilt Class */
+.card-3d-tilt-container {
+  perspective: 1000px;
+}
+
+.card-3d-tilt {
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(0);
+  transition: transform 0.1s ease-out, box-shadow 0.25s ease;
+}
+
+.card-3d-tilt:hover {
+  box-shadow: var(--shadow-3d-hover);
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(6px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 3px;
+  opacity: 0.3;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Ambient Radial Glow Background */
+.ambient-glow-bg {
+  background-image: radial-gradient(circle at 50% -10%, var(--ambient-glow) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* Custom layout sizing and spacing rules */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg);
+  background-image: linear-gradient(135deg, #FFF8F0 0%, #FDEBD9 50%, #FCF1E7 100%);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.dark body {
+  background-image: linear-gradient(135deg, #1A1512 0%, #241D19 50%, #1A1512 100%);
+}
