@@ -1,43 +1,16 @@
-# BREEZY (Weather App)
+# BREEZY
 
-A modern, dynamic weather application built with React, Vite, Tailwind CSS, Framer Motion, and Three.js.
+A dynamic weather application displaying real-time data with interactive 3D elements.
 
-## Getting Started
+## How to use this code
 
-Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
-
-### Prerequisites
-
-Ensure you have Node.js and npm (Node Package Manager) installed on your system. You can download them from [https://nodejs.org/](https://nodejs.org/).
-
-### Installation & Launch
-
-1. **Clone the repository** (if you haven't already):
-   ```bash
-   git clone https://github.com/nihal81788/BREEZY.git
-   cd BREEZY
-   ```
-
-2. **Install dependencies**:
-   Run the following command to install all the required packages:
+1. **Install dependencies**:
    ```bash
    npm install
    ```
 
-3. **Run the development server**:
-   Start the application locally by running:
+2. **Launch the project**:
    ```bash
    npm run dev
    ```
-
-4. **View the app**:
-   Open your browser and navigate to the URL provided in your terminal (usually `http://localhost:5173/`).
-
-## Technologies Used
-
-* React
-* Vite
-* Tailwind CSS
-* Framer Motion
-* Three.js
-* Lucide React
+   Open `http://localhost:5173/` in your browser.
