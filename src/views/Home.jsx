@@ -46,7 +46,11 @@ export const Home = () => {
 
   const handleRefresh = async () => {
     setRefreshing(true);
-    await loadWeather(activeCityKey);
+    if (activeCityKey === 'current-location') {
+      requestGeolocation();
+    } else {
+      await loadWeather(activeCityKey);
+    }
     setTimeout(() => setRefreshing(false), 800);
   };
 
