@@ -123,16 +123,47 @@ export const NavigationProvider = ({ children }) => {
 
   // Auto-detect location on mount
   useEffect(() => {
-    if (geoState === 'prompt') {
-      // Small delay to make it feel premium before asking for location
-      const timer = setTimeout(() => {
-        requestGeolocation();
-      }, 1500);
-      return () => clearTimeout(timer);
-    } else if (geoState === 'granted') {
-      // Immediately fetch if already granted
-      requestGeolocation();
-    }
+    let cancelled = false;
+    let timer = null;
+
+    const checkPermissionAndRequest = async () => {
+      try {
+        if (navigator.permissions && navigator.permissions.query) {
+          const result = await navigator.permissions.query({ name: 'geolocation' });
+          if (cancelled) return;
+
+          if (result.state === 'granted') {
+            requestGeolocation();
+          } else if (result.state === 'prompt') {
+            setGeoState('prompt');
+            timer = setTimeout(() => {
+              if (!cancelled) requestGeolocation();
+            }, 1500);
+          } else if (result.state === 'denied') {
+            setGeoState('denied');
+          }
+        } else {
+          // Fallback for older browsers
+          timer = setTimeout(() => {
+            if (!cancelled) requestGeolocation();
+          }, 1500);
+        }
+      } catch (error) {
+        // Fallback if permission query fails
+        if (!cancelled) {
+          timer = setTimeout(() => {
+            if (!cancelled) requestGeolocation();
+          }, 1500);
+        }
+      }
+    };
+
+    checkPermissionAndRequest();
+
+    return () => {
+      cancelled = true;
+      if (timer) clearTimeout(timer);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
