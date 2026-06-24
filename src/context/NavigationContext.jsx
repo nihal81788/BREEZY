@@ -89,7 +89,10 @@ export const NavigationProvider = ({ children }) => {
 
   // Trigger load on active city change
   useEffect(() => {
-    loadWeather(activeCityKey);
+    // Prevent geocoding 'current-location' string when geolocation coords are used
+    if (activeCityKey !== 'current-location') {
+      loadWeather(activeCityKey);
+    }
   }, [activeCityKey]);
 
   // Geolocation trigger
@@ -103,30 +106,35 @@ export const NavigationProvider = ({ children }) => {
       async (position) => {
         setGeoState('granted');
         setShowGeoPrompt(false);
-        // In a real app we'd resolve lat/lng to a city. 
-        // Here we'll mock loading a nearby city (e.g. Sydney or Paris) or just keep Tokyo but set state.
-        // Let's load Paris as our "geolocated" city demo
-        setActiveCityKey('paris');
+        // Use real coordinates instead of mocking 'paris'
+        setActiveCityKey('current-location'); // Use a special key so we know it's geolocation
+        loadWeather({ lat: position.coords.latitude, lon: position.coords.longitude });
       },
       (error) => {
         setGeoState('denied');
         setShowGeoPrompt(false);
-        // Gracefully keep default
-        setActiveCityKey(getFallbackCity());
+        // Fallback to default if error and we have no valid city
+        if (activeCityKey === 'current-location') {
+          setActiveCityKey(getFallbackCity());
+        }
       }
     );
   };
 
-  // Trigger geo-prompt check on mount
+  // Auto-detect location on mount
   useEffect(() => {
     if (geoState === 'prompt') {
-      // Small delay to make it feel premium
+      // Small delay to make it feel premium before asking for location
       const timer = setTimeout(() => {
-        setShowGeoPrompt(true);
+        requestGeolocation();
       }, 1500);
       return () => clearTimeout(timer);
+    } else if (geoState === 'granted') {
+      // Immediately fetch if already granted
+      requestGeolocation();
     }
-  }, [geoState]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Helpers for Unit Conversion
   const formatTemp = (celsius) => {
