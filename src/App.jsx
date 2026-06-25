@@ -8,7 +8,7 @@ import { MetricDetail } from './views/MetricDetail';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const AppContent = () => {
-  const { currentPath } = useNavigation();
+  const { currentPath, navigate } = useNavigation();
   const [splashComplete, setSplashComplete] = useState(false);
 
   const renderRoute = () => {
