@@ -121,31 +121,6 @@ export const Settings = () => {
           </div>
         </TactileTilt>
 
-        {/* 3. Mock Alerts */}
-        <TactileTilt maxTilt={8}>
-          <div className="card-3d p-6 h-full flex flex-col justify-between gap-6">
-            <div className="flex items-start gap-4">
-              <div className="p-3 bg-accent-soft text-accent rounded-2xl">
-                <ShieldAlert className="w-6 h-6" />
-              </div>
-              <div>
-                <h2 className="font-bold text-lg text-text">Notifications</h2>
-                <p className="text-xs text-text-muted">Simulated options for severe weather alerts</p>
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-3">
-              <label className="flex items-center justify-between p-3 bg-bg/25 border border-border rounded-xl cursor-pointer hover:bg-bg/50 transition-all select-none">
-                <span className="text-sm font-medium text-text">Severe Weather Warnings</span>
-                <input type="checkbox" defaultChecked className="accent-accent w-4 h-4 cursor-pointer" />
-              </label>
-              <label className="flex items-center justify-between p-3 bg-bg/25 border border-border rounded-xl cursor-pointer hover:bg-bg/50 transition-all select-none">
-                <span className="text-sm font-medium text-text">Daily Morning Digest</span>
-                <input type="checkbox" className="accent-accent w-4 h-4 cursor-pointer" />
-              </label>
-            </div>
-          </div>
-        </TactileTilt>
 
         {/* 4. About App */}
         <TactileTilt maxTilt={8}>
@@ -170,13 +145,9 @@ export const Settings = () => {
                 <span className="font-mono font-semibold">Three.js / React 19</span>
               </div>
               <div className="flex justify-between py-1">
-                <span className="text-text-muted">Typography</span>
-                <span className="font-semibold">Clash Display / Outfit</span>
-              </div>
-              <div className="flex justify-between py-1">
                 <span className="text-text-muted">Creator</span>
                 <a href="#" className="text-accent font-semibold hover:underline flex items-center gap-1">
-                  Antigravity AI
+                  Nihal Kumar
                 </a>
               </div>
             </div>

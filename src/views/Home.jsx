@@ -96,7 +96,7 @@ export const Home = () => {
   }
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 py-6 flex flex-col gap-6 select-none pb-24">
+    <div className="w-full max-w-6xl mx-auto px-4 py-4 md:py-6 flex flex-col gap-4 md:gap-6 select-none pb-24 md:pb-6">
       {/* 1. Header Toolbar */}
       <header className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-4">
         <div className="flex items-center gap-2">
@@ -167,10 +167,10 @@ export const Home = () => {
       )}
 
       {/* 3. Hero Weather Zone */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
         <div className="md:col-span-2">
           <TactileTilt maxTilt={8}>
-            <div className="card-3d p-6 md:p-8 flex flex-col md:flex-row items-center justify-between min-h-[260px] gap-6 relative overflow-hidden">
+            <div className="card-3d p-5 md:p-8 flex flex-col md:flex-row items-center justify-between min-h-[220px] md:min-h-[260px] gap-6 relative overflow-hidden">
               
               {/* Left Details */}
               <div className="flex flex-col gap-4 self-start">
@@ -184,7 +184,7 @@ export const Home = () => {
                 </div>
 
                 <div className="flex flex-col">
-                  <h1 className="font-display font-bold text-[80px] leading-none tracking-tighter text-text relative">
+                  <h1 className="font-display font-bold text-6xl md:text-[80px] leading-none tracking-tighter text-text relative">
                     {formatTemp(weatherData.temp)}
                   </h1>
                   <span className="font-display font-semibold text-lg text-text capitalize mt-2">
@@ -221,7 +221,7 @@ export const Home = () => {
         </div>
 
         {/* 4. Bento Grid Metrics Row */}
-        <div className="grid grid-cols-2 md:grid-cols-1 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-1 gap-4 md:gap-6">
           
           {/* Wind Widget */}
           <div onClick={() => navigate('/details/wind')} className="cursor-pointer">
@@ -233,7 +233,7 @@ export const Home = () => {
                 </div>
                 <div className="flex items-end justify-between">
                   <div>
-                    <div className="font-display font-bold text-3xl text-text">{formatWind(weatherData.wind_speed)}</div>
+                    <div className="font-display font-bold text-2xl md:text-3xl text-text whitespace-nowrap">{formatWind(weatherData.wind_speed)}</div>
                     <span className="text-[10px] text-text-muted font-medium uppercase mt-1 block">Direction: {weatherData.wind_deg}°</span>
                   </div>
                   {/* Miniature 3D compass reference */}
@@ -257,7 +257,7 @@ export const Home = () => {
                   <Droplets className="w-5 h-5 text-text-muted group-hover:text-accent transition-colors" />
                 </div>
                 <div>
-                  <div className="font-display font-bold text-3xl text-text">{weatherData.humidity}%</div>
+                  <div className="font-display font-bold text-2xl md:text-3xl text-text whitespace-nowrap">{weatherData.humidity}%</div>
                   <span className="text-[10px] text-text-muted font-medium uppercase mt-1 block">Relative Saturation</span>
                 </div>
               </div>
@@ -268,7 +268,7 @@ export const Home = () => {
       </div>
 
       {/* 5. Bento Grid Secondary Row */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-6">
         
         {/* UV Index Widget */}
         <div onClick={() => navigate('/details/uv_index')} className="cursor-pointer">
@@ -279,7 +279,7 @@ export const Home = () => {
                 <Sun className="w-5 h-5 text-text-muted group-hover:text-accent transition-colors" />
               </div>
               <div>
-                <div className="font-display font-bold text-3xl text-text">{weatherData.uv_index}</div>
+                <div className="font-display font-bold text-2xl md:text-3xl text-text">{weatherData.uv_index}</div>
                 <span className={`text-[10px] font-semibold uppercase tracking-[0.06em] mt-1 block ${
                   weatherData.uv_index <= 2 ? 'text-text-muted' : 
                   weatherData.uv_index <= 5 ? 'text-accent' : 
@@ -319,7 +319,7 @@ export const Home = () => {
                 <Gauge className="w-5 h-5 text-text-muted group-hover:text-accent transition-colors" />
               </div>
               <div>
-                <div className="font-display font-bold text-3xl text-text">{weatherData.pressure}</div>
+                <div className="font-display font-bold text-2xl md:text-3xl text-text whitespace-nowrap">{weatherData.pressure}</div>
                 <span className="text-[10px] text-text-muted font-semibold uppercase mt-1 block">hPa • Barometric</span>
               </div>
             </div>
@@ -335,7 +335,7 @@ export const Home = () => {
                 <Eye className="w-5 h-5 text-text-muted group-hover:text-accent transition-colors" />
               </div>
               <div>
-                <div className="font-display font-bold text-3xl text-text">{weatherData.visibility} km</div>
+                <div className="font-display font-bold text-2xl md:text-3xl text-text whitespace-nowrap">{weatherData.visibility} km</div>
                 <span className="text-[10px] text-text-muted font-semibold uppercase mt-1 block">Horizontal transparency</span>
               </div>
             </div>
